@@ -1,10 +1,12 @@
-<script>
+<script lang='ts'>
     import { isMobile, height } from "./stores";
     import { useMediaQuery } from "svelte-breakpoints";
     import Navbar from "$lib/components/Navbar.svelte";
     import Background from "$lib/components/Background.svelte";
+    import Frame from "$lib/components/Frame.svelte";
     import "@fontsource-variable/sofia-sans"
     import "../app.css";
+    import { page } from "$app/stores";
     
     const mobile = useMediaQuery('(max-width: 768px)');
     $: $mobile, $isMobile = $mobile;
@@ -16,7 +18,10 @@
     <main class='absolute h-[calc(100%-4rem)] w-[calc(100%-4rem)] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-10'>
         <slot />
     </main>
-    <Background />
+    {#if $page.route.id !== '/projects/ifcviewer'}
+        <Background/>
+    {/if}
+    <Frame />
 </div>
 <svelte:window bind:innerHeight={$height} />
 

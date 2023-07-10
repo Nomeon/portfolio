@@ -44,9 +44,9 @@
             {#if $isMobile}
                 <div class='h-[0.5px] w-full bg-[rgba(255,255,255,.7)]'></div>
             {/if}
-            <div id='navlist' class='{$isMobile ? 'h-1/4 w-full justify-start pl-4 active:bg-gradient-to-r hover:bg-gradient-to-r' : 'h-full w-1/4 justify-center active:bg-gradient-to-t hover:bg-gradient-to-t'} flex items-center text-white [&>a]:hover:text-black active:from-white active:to-transparent hover:from-white hover:to-transparent'>        
-                <a on:click={handleClick} class='text-white text-2xl capitalize' href={`/${menuitem}`}>{menuitem === '' ? 'Home' : menuitem}</a>
-            </div>
+            <a on:click={handleClick} href={`/${menuitem}`} id='navlist' class='{$isMobile ? 'h-1/4 w-full justify-start pl-4 active:bg-gradient-to-r hover:bg-gradient-to-r' : 'h-full w-1/4 justify-center active:bg-gradient-to-t hover:bg-gradient-to-t'} group flex items-center text-white [&>a]:hover:text-black active:from-white active:to-transparent hover:from-white hover:to-transparent'>        
+                <p class='text-white text-2xl capitalize group-hover:text-black'>{menuitem === '' ? 'Home' : menuitem}</p>
+            </a>
         {/each}
     </div>
     {/if}
