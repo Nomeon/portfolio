@@ -1,33 +1,28 @@
 <script lang='ts'>
-    import { isMobile, height } from "./stores";
+    import { isMobile } from "./stores";
     import { useMediaQuery } from "svelte-breakpoints";
     import Navbar from "$lib/components/Navbar.svelte";
     import Background from "$lib/components/Background.svelte";
-    import Frame from "$lib/components/Frame.svelte";
-    import "@fontsource-variable/sofia-sans"
+    import "@fontsource/poppins";
     import "../app.css";
-    import { page } from "$app/stores";
     
     const mobile = useMediaQuery('(max-width: 768px)');
     $: $mobile, $isMobile = $mobile;
-
 </script>
   
-<div id="app" class="bg-black text-white font-sofia font-light {$isMobile ? '' : 'h-screen'} w-screen" style="{$isMobile ? `height: ${$height - 0.5}px;` : ''}">
-    <Navbar />
-    <main class='absolute h-[calc(100%-4rem)] w-[calc(100%-4rem)] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-10'>
-        <slot />
+<div id="app" class="bg-black text-white font-sofia font-light">
+    <main class='absolute h-[100dvh] w-full z-10'>
+        <Navbar />
+        <div class='h-full px-48 mt-16'>
+            <slot />
+        </div>
     </main>
-    {#if $page.route.id !== '/projects/ifcviewer'}
-        <Background/>
-    {/if}
-    <Frame />
+    <Background/>
 </div>
-<svelte:window bind:innerHeight={$height} />
 
 <style lang='postcss'>
     :global(body) {
-        font-family: 'Sofia Sans Variable', sans-serif;
+        font-family: 'Poppins', sans-serif;
         overflow: hidden;
     }
 </style>

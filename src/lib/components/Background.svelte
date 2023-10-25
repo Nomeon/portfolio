@@ -4,7 +4,6 @@
     import NET from "$lib/components/vanta";
     import * as THREE from "three";
 
-    // @ts-ignore
     let effect: { destroy: () => void; resize: () => any; };
 
     onMount(() => {
@@ -15,5 +14,5 @@
     });
 </script>
 
-<div id="background" class="absolute top-8 left-8 w-[calc(100%-4rem)] h-[calc(100%-4rem)]" />
+<div id="background" class="absolute h-full w-full" />
 <svelte:window on:resize={effect.resize()} />

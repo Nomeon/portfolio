@@ -1,54 +1,90 @@
 <script lang='ts'>
     import { toggled, isMobile } from '../../routes/stores';
-    import { fade } from 'svelte/transition';
-    import { onMount } from 'svelte';
-
-    onMount(() => {
-        moveMenu();
-    })
-
-    const menu = ['', 'about', 'projects', 'contact']
+    import Icon from '@iconify/svelte';
     
+    let width: number;
+
     function toggleNav() {
-        $toggled ? $toggled = false : $toggled = true;
-        moveMenu();
+        $toggled = !$toggled;
     }
 
-    function handleClick() {
-        $toggled = false;
-        moveMenu();
+    function handleResize() {
+        if (width <= 768) { $toggled = false}
     }
-
-    function moveMenu() {
-        let navmenu = document.getElementById('navmenu');
-        if (navmenu) {
-            if ($isMobile) {
-                $toggled ? navmenu.style.height = '16rem' : navmenu.style.height = '0';
-            } else {
-                $toggled ? navmenu.style.height = '4rem' : navmenu.style.height = '0';
-            }
-        }
-    }
-
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div on:click={toggleNav} class='fixed bottom-8 right-8 rotate-90 origin-bottom-right items-end m-0 p-0 text-xl/normal text-white flex gap-2 cursor-pointer'>
-    <div id='box' class='text-3xl p-0 m-0 {$toggled ? 'before:content-["■"]' : 'before:content-["□"]'}'></div>
-    <h3 class=''>MENU</h3>
-</div>
-<nav id='navmenu' class='mix-blend-difference {$isMobile ? 'bg-gradient-to-r to-75%' : 'bg-gradient-to-t '} from-cyan-500 to-transparent w-[calc(100%-4rem)] absolute bottom-8 left-8 z-40 transition-all duration-300'>
-    {#if $toggled}
-    <div  in:fade={{ duration: 500 }} class='flex {$isMobile ? 'flex-col' : 'flex-row'} h-full'>
-        {#each menu as menuitem}
-            {#if $isMobile}
-                <div class='h-[0.5px] w-full bg-[rgba(255,255,255,.7)]'></div>
-            {/if}
-            <a on:click={handleClick} href={`/${menuitem}`} id='navlist' class='{$isMobile ? 'h-1/4 w-full justify-start pl-4 active:bg-gradient-to-r hover:bg-gradient-to-r' : 'h-full w-1/4 justify-center active:bg-gradient-to-t hover:bg-gradient-to-t'} group flex items-center text-white [&>a]:hover:text-black active:from-white active:to-transparent hover:from-white hover:to-transparent'>        
-                <p class='text-white text-2xl capitalize group-hover:text-black'>{menuitem === '' ? 'Home' : menuitem}</p>
-            </a>
-        {/each}
-    </div>
+<nav class='h-24 flex justify-between relative font-semibold box-border md:border-b md:border-white'>
+    <div class='md:w-1/4 w-1/2 flex items-center justify-start z-20 pl-12' id='logo'>
+        <a href='/'><img class='h-8' src="/weblogo.svg" alt="Nomeon Logo" /></a>
+    </div> 
+    {#if $toggled === true && width <= 768}
+        <div id='navunderlay' class='h-24 w-full z-10 absolute top-0'/>
     {/if}
+    <div class='{$toggled ? "max-md:translate-y-0" : "max-md:-translate-y-[calc(100%-6rem)]"} md:pr-12 bg-black backdrop-blur-sm w-3/4 flex justify-center max-md:h-screen max-md:border-b-2 max-md:w-screen max-md:fixed max-md:flex-col max-md:transition-transform max-md:duration-500 max-md:ease-in-out' id='mobile'>
+        <div class='w-3/4 flex items-center gap-16 max-md:basis-3/5 max-md:gap-16 max-md:flex-col justify-center max-md:w-full text-3xl md:text-2xl' id='links'>
+            <a id='hover' on:click={toggleNav} href='/about' class='relative'>About</a>
+            <a id='hover' on:click={toggleNav} href='/projects' class='relative'>Projects</a>
+            <a id='hover' on:click={toggleNav} href='/contact' class='relative'>Contact</a>
+        </div>
+        <div class='w-1/4 flex items-center gap-8 justify-center md:justify-end max-md:w-full max-md:gap-16' id='socials'>
+            <a href='/'>
+                <Icon width='{$isMobile ? '48':'32'}' icon="mdi:linkedin" />
+            </a>
+            <a href='/'>
+                <Icon width='{$isMobile ? '48':'32'}' icon="mdi:email" />
+            </a>
+        </div>
+    </div>
+    <button title="Menu" class="bg-transparent flex md:hidden z-20 items-center relative justify-end mr-12 w-1/4" type="button" on:click={toggleNav}>
+		<div id="menu-toggle" class={$toggled ? 'toggled' : ''}>
+			<div id="icon" class="relative h-[0.2rem] w-[1.8rem] transition-all duration-200 {$toggled ? 'bg-transparent before:bg-red-500 after:bg-red-500 after:rotate-45 before:-rotate-45' : 'bg-white before:bg-white after:bg-white'}"/>
+		</div>
 </nav>
-<svelte:window on:resize={moveMenu}/>
+<svelte:window bind:innerWidth={width} on:resize={handleResize}/>
+
+<style>
+    #hover:before {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0.2rem;
+        background: #fff;
+        transform: scaleX(0);
+    }
+    #hover:hover:before {
+        transform: scaleX(1);
+    }
+    a:before, a:after {
+        content: '';
+        position: absolute;
+        transition: transform .2s ease;
+    }
+    #hover:active:before {
+        transform: scaleX(1);
+    }
+    #hover:focus:before {
+        transform: scaleX(1);
+    }
+
+    /* Navbar toggle button */
+    #menu-toggle.toggled > #icon:before {
+        top: 0px;
+    }
+    #menu-toggle.toggled > #icon:after {
+        bottom: 0px;
+    }
+    #icon:before,
+    #icon:after {
+        height: 0.2rem;
+        left: 0px;
+        position: absolute;
+        transition: all 0.25s;
+        width: 1.8rem;
+    }
+    #icon:before {
+        top: -0.55rem;
+    }
+    #icon:after {
+        bottom: -0.55rem;
+    }
+</style>
