@@ -3,6 +3,7 @@
     import { useMediaQuery } from "svelte-breakpoints";
     import Navbar from "$lib/components/Navbar.svelte";
     import Background from "$lib/components/Background.svelte";
+    import Footer from "$lib/components/Footer.svelte";
     import "@fontsource/poppins";
     import "../app.css";
     
@@ -10,12 +11,13 @@
     $: $mobile, $isMobile = $mobile;
 </script>
   
-<div id="app" class="bg-black text-white font-sofia font-light">
-    <main class='absolute h-[100dvh] w-full z-10'>
+<div id="app" class="bg-dark1 text-light1 font-sofia font-light">
+    <main class='absolute h-[100dvh] w-full z-10 overflow-y-scroll scroll-smooth'>
         <Navbar />
         <div class='h-full px-48 mt-16'>
             <slot />
         </div>
+        <Footer />
     </main>
     <Background/>
 </div>
@@ -24,5 +26,9 @@
     :global(body) {
         font-family: 'Poppins', sans-serif;
         overflow: hidden;
+    }
+    ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
     }
 </style>
