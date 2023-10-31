@@ -11,9 +11,9 @@
 </script>
   
 <div id="app" class=" text-white font-light">
-    <main class='absolute h-[100dvh] w-full z-10'>
+    <main class='absolute h-full w-full z-10'>
         <Navbar />
-        <div class='overflow-y-scroll scroll-smooth h-full'>
+        <div class='overflow-y-scroll scroll-smooth h-[100dvh]'>
             <slot />
             <Footer />
         </div>
