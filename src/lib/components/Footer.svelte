@@ -1,4 +1,4 @@
-<div class='h-20 text-sm flex flex-col gap-2'>
+<div class='h-20 text-sm flex flex-col gap-2 bg-slate-950'>
     <div id='tandc' class='w-full text-sky-500 flex items-center justify-center'>
         <a href='/terms.pdf' download>Terms and Conditions</a>
     </div>
