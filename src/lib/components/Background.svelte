@@ -14,5 +14,5 @@
     });
 </script>
 
-<div id="background" class="absolute h-full w-full bg-slate-950" />
+<div id="background" class="absolute h-[100dvh] w-full bg-slate-950" />
 <svelte:window on:resize={effect.resize()} />
