@@ -12,7 +12,7 @@
     let height: number;
 </script>
   
-<div id="app" style='height: {height}px' class="text-white font-light">
+<div id="app" class="text-white font-light h-[100dvh] bg-slate-950">
     <main class='absolute h-full w-full z-10'>
         <Navbar />
         <div class='overflow-y-scroll scroll-smooth h-full'>
