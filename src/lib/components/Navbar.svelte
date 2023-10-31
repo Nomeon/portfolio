@@ -11,11 +11,17 @@
     function handleResize() {
         if (width <= 768) { $toggled = false}
     }
+
+    function logoToggle() {
+        if ($toggled) {
+            toggleNav();
+        }
+    }
 </script>
 
 <nav class='h-20 w-full bg-slate-950 flex justify-between fixed text-white border-b-2'>
     <div class='w-1/2 flex items-center justify-start h-full pl-4 z-20' id='logo'>
-        <a href='/' on:click={toggleNav}><img class='h-8' src="/weblogo.svg" alt="Nomeon Logo" /></a>
+        <a href='/' on:click={logoToggle}><img class='h-8' src="/weblogo.svg" alt="Nomeon Logo" /></a>
     </div>
     <div class='{$toggled ? "translate-x-0" : "translate-x-full"} bg-slate-950 z-10 flex justify-center w-full h-full fixed flex-col transition-transform duration-500 ease-in-out' id='mobile'>
         <div class='flex items-center gap-8 basis-3/5 flex-col justify-center w-full text-3xl' id='links'>
