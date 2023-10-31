@@ -23,7 +23,7 @@
     <div class='w-1/2 flex items-center justify-start h-full pl-4 z-20' id='logo'>
         <a href='/' on:click={logoToggle}><img class='h-8' src="/weblogo.svg" alt="Nomeon Logo" /></a>
     </div>
-    <div class='{$toggled ? "translate-x-0" : "translate-x-full"} bg-slate-950 z-10 flex justify-center w-full h-full fixed flex-col transition-transform duration-500 ease-in-out' id='mobile'>
+    <div class='{$toggled ? "translate-x-0" : "translate-x-full"} bg-slate-950 z-10 flex justify-center w-full h-[100dvh] fixed flex-col transition-transform duration-500 ease-in-out' id='mobile'>
         <div class='flex items-center gap-8 basis-3/5 flex-col justify-center w-full text-3xl' id='links'>
             <a id='hover' on:click={toggleNav} href='/about' class='relative'>About</a>
             <a id='hover' on:click={toggleNav} href='/projects' class='relative'>Projects</a>
