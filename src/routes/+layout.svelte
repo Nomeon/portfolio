@@ -13,7 +13,7 @@
 <div id="app" class=" text-white font-light">
     <main class='absolute h-[100dvh] w-full z-10'>
         <Navbar />
-        <div class='overflow-y-scroll scroll-smooth h-[100dvh]'>
+        <div class='overflow-y-scroll scroll-smooth h-full'>
             <slot />
             <Footer />
         </div>
