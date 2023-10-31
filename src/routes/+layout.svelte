@@ -8,9 +8,11 @@
     
     const mobile = useMediaQuery('(max-width: 768px)');
     $: $mobile, $isMobile = $mobile;
+
+    let height: number;
 </script>
   
-<div id="app" class="text-white font-light h-[100dvh]">
+<div id="app" style='height: {height}px' class="text-white font-light">
     <main class='absolute h-full w-full z-10'>
         <Navbar />
         <div class='overflow-y-scroll scroll-smooth h-full'>
@@ -20,6 +22,7 @@
     </main>
     <Background/>
 </div>
+<svelte:window bind:innerHeight={height} />
 
 <style lang='postcss'>
     :global(body) {
