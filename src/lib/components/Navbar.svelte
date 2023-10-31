@@ -13,60 +13,34 @@
     }
 </script>
 
-<nav class='h-24 flex justify-between relative font-semibold box-border md:border-b md:border-white bg-dark1'>
-    <div class='md:w-1/4 w-1/2 flex items-center justify-start z-20 pl-12' id='logo'>
+<nav class='h-20 w-full bg-slate-950 flex justify-between fixed text-white border-b-2'>
+    <div class='w-1/2 flex items-center justify-start h-full pl-4 z-20' id='logo'>
         <a href='/'><img class='h-8' src="/weblogo.svg" alt="Nomeon Logo" /></a>
-    </div> 
-    {#if $toggled === true && width <= 768}
-        <div id='navunderlay' class='h-24 w-full z-10 absolute top-0'/>
-    {/if}
-    <div class='{$toggled ? "max-md:translate-y-0" : "max-md:-translate-y-[calc(100%-6rem)]"} md:pr-12 bg-dark1 w-3/4 flex justify-center max-md:h-screen max-md:border-b-2 max-md:w-screen max-md:fixed max-md:flex-col max-md:transition-transform max-md:duration-500 max-md:ease-in-out' id='mobile'>
-        <div class='w-3/4 flex items-center gap-16 max-md:basis-3/5 max-md:gap-16 max-md:flex-col justify-center max-md:w-full text-3xl md:text-2xl' id='links'>
+    </div>
+    <div class='{$toggled ? "translate-x-0" : "translate-x-full"} bg-slate-950 z-10 flex justify-center w-full h-full fixed flex-col transition-transform duration-500 ease-in-out' id='mobile'>
+        <div class='flex items-center gap-8 basis-3/5 flex-col justify-center w-full text-3xl' id='links'>
             <a id='hover' on:click={toggleNav} href='/about' class='relative'>About</a>
             <a id='hover' on:click={toggleNav} href='/projects' class='relative'>Projects</a>
             <a id='hover' on:click={toggleNav} href='/contact' class='relative'>Contact</a>
         </div>
-        <div class='w-1/4 flex items-center gap-8 justify-center md:justify-end max-md:w-full max-md:gap-16' id='socials'>
+        <div class='flex items-center gap-8 justify-center w-full' id='socials'>
             <a href='/'>
-                <Icon width='{$isMobile ? '48':'32'}' icon="mdi:linkedin" />
+                <Icon width='48' icon="mdi:linkedin" />
             </a>
             <a href='/'>
-                <Icon width='{$isMobile ? '48':'32'}' icon="mdi:email" />
+                <Icon width='48' icon="mdi:email" />
             </a>
         </div>
     </div>
-    <button title="Menu" class="bg-transparent flex md:hidden z-20 items-center relative justify-end mr-12 w-1/4" type="button" on:click={toggleNav}>
-		<div id="menu-toggle" class={$toggled ? 'toggled' : ''}>
-			<div id="icon" class="relative h-[0.2rem] w-[1.8rem] transition-all duration-200 {$toggled ? 'bg-transparent before:bg-accent1 after:bg-accent1 after:rotate-45 before:-rotate-45' : 'bg-light1 before:bg-light1 after:bg-light1'}"/>
-		</div>
+    <button title="Menu" class="bg-transparent flex md:hidden z-20 items-center relative justify-end pr-4 w-1/2" type="button" on:click={toggleNav}>
+        <div id="menu-toggle" class={$toggled ? 'toggled' : ''}>
+            <div id="icon" class="relative h-[0.2rem] w-[1.8rem] transition-all duration-200 {$toggled ? 'bg-transparent before:bg-sky-400 after:bg-sky-400 after:rotate-45 before:-rotate-45' : 'bg-white before:bg-white after:bg-white'}"/>
+        </div>
+    </button>
 </nav>
 <svelte:window bind:innerWidth={width} on:resize={handleResize}/>
 
 <style>
-    #hover:before {
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 0.2rem;
-        background: #fff;
-        transform: scaleX(0);
-    }
-    #hover:hover:before {
-        transform: scaleX(1);
-    }
-    a:before, a:after {
-        content: '';
-        position: absolute;
-        transition: transform .2s ease;
-    }
-    #hover:active:before {
-        transform: scaleX(1);
-    }
-    #hover:focus:before {
-        transform: scaleX(1);
-
-    }
-
     /* Navbar toggle button */
     #menu-toggle.toggled > #icon:before {
         top: 0px;
@@ -83,9 +57,9 @@
         width: 1.8rem;
     }
     #icon:before {
-        top: -0.55rem;
+        top: -0.6rem;
     }
     #icon:after {
-        bottom: -0.55rem;
+        bottom: -0.6rem;
     }
 </style>
